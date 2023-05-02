@@ -24,8 +24,8 @@ if __name__ == '__main__':
                 decoded_data = crc.decode(data)
 
                 if decoded_data != 'ERROR':
-                    print(f'Получено сообщение: {text_from_bits(decoded_data)}')
+                    print(f'Получено сообщение: {text_from_bits(decoded_data)}\n')
                     conn.sendall('Сообщение успешно доставлено!'.encode())
                 else:
-                    print('При отправке произошла ошибка. Отправляю запрос на переотправку...')
+                    print('При отправке произошла ошибка. Отправляю запрос на переотправку...\n')
                     conn.sendall(ERR_MSG.encode())

@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     with closing(s) as sock:
         while True:
-            input_string = input('\nВведите сообщение для отправки на сервер: ')
+            input_string = input('Введите сообщение для отправки на сервер: ')
             data = text_to_bits(input_string)
             print(f'Сообщение в двоичном виде:\n{data}')
 
@@ -36,4 +36,4 @@ if __name__ == '__main__':
             sock.sendto(answer.encode(), (HOST, PORT))
 
             feedback = sock.recv(1024).decode()
-            print(f'Ответ от сервера: {feedback}')
+            print(f'Ответ от сервера: {feedback}\n')

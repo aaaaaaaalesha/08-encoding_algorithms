@@ -26,5 +26,5 @@ if __name__ == '__main__':
                 if err_pos is not None:
                     print(f'Исправлена ошибка в {err_pos} бите:\n{decoded_data}')
 
-                print(f'Получено сообщение:\n{text_from_bits(decoded_data)}')
-                conn.sendall('Сообщение успешно доставлено!'.encode())
+                print(f'Получено сообщение: {text_from_bits(decoded_data)}')
+                conn.sendall('Сообщение успешно доставлено!\n'.encode())
