@@ -5,10 +5,6 @@ GEN_POLY = '1011'
 
 
 def encode(data: str, gen_poly=GEN_POLY):
-    """
-    Function used at the sender side to encode
-    data by appending remainder of modular division at the end of data.
-    """
     remainder = __div(
         # Appends n - 1 zeroes at end of data.
         data + '0' * (len(gen_poly) - 1),
@@ -21,10 +17,6 @@ def encode(data: str, gen_poly=GEN_POLY):
 
 
 def decode(data: str, gen_poly=GEN_POLY) -> str:
-    """
-    Function used to decode
-    data by dividing message with generator polynomial.
-    """
     remainder = __div(data, gen_poly)
 
     # If remainder is all zeroes (no error), return message without error bits.

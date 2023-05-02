@@ -1,4 +1,3 @@
-import binascii
 import random
 import socket
 
@@ -6,14 +5,7 @@ from contextlib import closing
 
 import crc
 
-from src.constants import ERR_MSG
-
-
-def text_to_bits(text, encoding='utf-8', errors='surrogatepass'):
-    bits = bin(int(
-        binascii.hexlify(text.encode(encoding, errors)), 16)
-    )[2:]
-    return bits.zfill(8 * ((len(bits) + 7) // 8))
+from src.utils import text_to_bits, ERR_MSG
 
 
 if __name__ == '__main__':

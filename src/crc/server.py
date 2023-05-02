@@ -1,21 +1,8 @@
-import binascii
 import socket
 
 import crc
 
-from src.constants import ERR_MSG
-
-
-def __int2bytes(i):
-    hex_string = '%x' % i
-    n = len(hex_string)
-    return binascii.unhexlify(hex_string.zfill(n + (n & 1)))
-
-
-def text_from_bits(bits, encoding='utf-8', errors='surrogatepass'):
-    n = int(bits, 2)
-    return __int2bytes(n).decode(encoding, errors)
-
+from src.utils import text_from_bits, ERR_MSG
 
 if __name__ == '__main__':
     HOST = '127.0.0.1'

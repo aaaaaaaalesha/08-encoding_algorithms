@@ -1,0 +1,1 @@
+"""Haffman coding module."""
