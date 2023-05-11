@@ -1,6 +1,11 @@
 """Haffman coding module."""
 
 
+def __is_power_of_two(n):
+    """Проверяет, является ли число n степенью двойки."""
+    return (n & (n - 1)) == 0 and n != 0
+
+
 def encode(data: str) -> str:
     bits = [int(bit) for bit in data]
     # Рассчитываем число проверочных битов.
@@ -34,32 +39,30 @@ def decode(data: str) -> tuple[str, int | None]:
     while 2 ** r < len(bits):
         r += 1
 
-    error_pos = 1
+    error_pos = 0
 
-    # Вычисляем позицию ошибки, складывая все контрольные биты.
-    for i in range(r):
-        pos = 2 ** i - 1
+    # Вычисляем позицию ошибки.
+    check_bits = [2 ** i for i in range(r)]
+    check_bits.reverse()
+    for i, check_bit in enumerate(check_bits):
         check = 0
-        for j in range(pos, len(bits), 2 * pos + 2):
-            check ^= bits[j:j + pos + 1].count(1) % 2
-        if check != 0:
-            error_pos += pos
+        for j in range(check_bit - 1, len(bits), check_bit * 2):
+            check += sum(bits[j:j + check_bit])
+        if check % 2 == 1:
+            error_pos += check_bit
 
     # Исправляем ошибку.
-    if error_pos > 1:
-        bits[error_pos - 1] ^= 1
+    if error_pos > 0:
+        bits[error_pos - 1] = 1 - bits[error_pos - 1]
 
-    # Отбрасываем контрольные биты.
-    result = []
-    j = 0
-    for i in range(len(bits)):
-        if i + 1 == 2 ** j:
-            j += 1
-        else:
-            result.append(bits[i])
+    # Убираем биты проверки.
+    decoded_data = ''.join(
+        str(bit)
+        for i, bit in enumerate(bits)
+        if not __is_power_of_two(i + 1)
+    )
 
-    # Возвращаем декодированные данные и позицию ошибки, если она была найдена.
     return (
-        ''.join([str(bit) for bit in result]),
-        error_pos - 1 if error_pos > 1 else None,
+        decoded_data,
+        error_pos - 1 if error_pos > 0 else None,
     )
