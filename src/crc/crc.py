@@ -28,7 +28,6 @@ def decode(data: str, gen_poly=GEN_POLY) -> str:
 
 
 def __xor(a: str, b: str) -> str:
-    """"""
     return ''.join([
         '0' if a[i] == b[i] else '1'
         for i in range(1, len(b))
@@ -41,7 +40,7 @@ def __div(divisible: str, divisor: str) -> str:
     pick = len(divisor)
 
     # Slicing the dividend to appropriate length for particular step.
-    tmp = divisible[0: pick]
+    tmp = divisible[:pick]
 
     while pick < len(divisible):
         if tmp[0] == '1':
