@@ -1,9 +1,6 @@
 """Haffman coding module."""
 
-
-def __is_power_of_two(n):
-    """Проверяет, является ли число n степенью двойки."""
-    return (n & (n - 1)) == 0 and n != 0
+from src.utils import is_power_of_two
 
 
 def encode(data: str) -> str:
@@ -59,7 +56,7 @@ def decode(data: str) -> tuple[str, int | None]:
     decoded_data = ''.join(
         str(bit)
         for i, bit in enumerate(bits)
-        if not __is_power_of_two(i + 1)
+        if not is_power_of_two(i + 1)
     )
 
     return (

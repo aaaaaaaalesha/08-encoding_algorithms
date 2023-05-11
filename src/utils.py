@@ -19,3 +19,8 @@ def int2bytes(i):
 def text_from_bits(bits, encoding='utf-8', errors='surrogatepass'):
     n = int(bits, 2)
     return int2bytes(n).decode(encoding, errors)
+
+
+def is_power_of_two(n):
+    """Проверяет, является ли число n степенью двойки."""
+    return (n & (n - 1)) == 0 and n != 0
